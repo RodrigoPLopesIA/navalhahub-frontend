@@ -1,29 +1,31 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth-service';
 import { BarbershopResponse, BarbershopService } from '../../services/barbershop-service';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  imports: [RouterLink,
+    RouterLinkActive],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard implements OnInit{
-  
+export class Dashboard implements OnInit {
+
 
   authService = inject(AuthService)
   barbershopService = inject(BarbershopService)
   id?: string | null
   barbershop!: BarbershopResponse
-  
+
   ngOnInit(): void {
-     this.findBarbershopById()
+    this.findBarbershopById()
   }
-  
-  logout() : void {
+
+  logout(): void {
     this.authService.logout()
   }
-   getToken(): string | undefined{
+  getToken(): string | undefined {
     return this.authService.getToken()
   }
   getUsername(): string | undefined {
@@ -33,7 +35,7 @@ export class Dashboard implements OnInit{
     return this.authService.getUser()
   }
 
-  findBarbershopById(){
+  findBarbershopById() {
     this.id = localStorage.getItem("selectedBarbershopId")
     this.barbershopService.findById(String(this.id)).subscribe({
       next: (response) => {
@@ -41,7 +43,7 @@ export class Dashboard implements OnInit{
       },
       error: (error) => {
         console.error("error ao buscar barbearia: ", error);
-        
+
       }
     })
   }

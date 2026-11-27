@@ -1,0 +1,16 @@
+@if (selectedBarber; as barber) {
+
+  <app-barber-profile
+    [barber]="barber"
+    (back)="closeProfile()"
+    (edit)="editBarber($event)"
+    (statusChange)="changeStatus($event)"
+  />
+
+} @else {
+
+  <app-barber-list
+    (profileRequested)="openProfile($event)"
+  />
+
+}
