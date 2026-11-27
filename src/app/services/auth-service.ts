@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Authentication } from '../interfaces/authentication';
-import { KeycloakService } from './keycloakService';
+import { KeycloakService } from './keycloak-service';
 
 @Injectable({
   providedIn: 'root',
