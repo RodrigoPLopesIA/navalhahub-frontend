@@ -23,7 +23,7 @@ export class KeycloakService implements Authentication {
 
   async login(): Promise<void> {
     await this.keycloak.login({
-      redirectUri: `${window.location.origin}/dashboard`
+      redirectUri: `${window.location.origin}/barbershops`
     });
   }
 

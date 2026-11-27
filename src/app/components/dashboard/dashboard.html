@@ -78,8 +78,8 @@
         </div>
 
         <div class="hidden text-left sm:block">
-          <p class="text-sm font-semibold text-white">Administrador</p>
-          <p class="text-xs text-gray-500">Minha barbearia</p>
+          <p class="text-sm font-semibold text-white">{{getUsername()}}</p>
+          <p class="text-xs text-gray-500">{{barbershop.name}}</p>
         </div>
 
         <svg xmlns="http://www.w3.org/2000/svg"
@@ -104,9 +104,11 @@
     <header class="flex flex-col justify-between gap-5 sm:flex-row sm:items-center">
       <div>
         <p class="text-sm text-gray-500">Painel de controle</p>
-        <h1 class="mt-1 text-3xl font-bold tracking-tight">
-          Visão geral
+        <h1 class="mt-1 text-3xl font-bold tracking-tight uppercase">
+          {{barbershop.name}}
         </h1>
+        <span class="text-sm text-gray-500 italic">@{{barbershop.slug}}</span>
+
         <p class="mt-2 text-sm text-gray-400">
           Acompanhe o desempenho da sua barbearia.
         </p>

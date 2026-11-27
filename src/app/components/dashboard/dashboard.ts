@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth-service';
+import { BarbershopResponse, BarbershopService } from '../../services/barbershop-service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,10 +8,18 @@ import { AuthService } from '../../services/auth-service';
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard {
+export class Dashboard implements OnInit{
+  
 
   authService = inject(AuthService)
-
+  barbershopService = inject(BarbershopService)
+  id?: string | null
+  barbershop!: BarbershopResponse
+  
+  ngOnInit(): void {
+     this.findBarbershopById()
+  }
+  
   logout() : void {
     this.authService.logout()
   }
@@ -22,5 +31,18 @@ export class Dashboard {
   }
   getUser() {
     return this.authService.getUser()
+  }
+
+  findBarbershopById(){
+    this.id = localStorage.getItem("selectedBarbershopId")
+    this.barbershopService.findById(String(this.id)).subscribe({
+      next: (response) => {
+        this.barbershop = response
+      },
+      error: (error) => {
+        console.error("error ao buscar barbearia: ", error);
+        
+      }
+    })
   }
 }
