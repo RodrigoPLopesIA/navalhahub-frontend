@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-landing',
@@ -7,6 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './landing.css',
 })
 export class Landing {
+  private readonly authService = inject(AuthService);
+
+  
    readonly features = [
     {
       icon: '◷',
@@ -42,6 +46,14 @@ export class Landing {
   ];
 
   onLoginClick(): void {
-    console.log('Login será implementado posteriormente.');
+    this.authService.login();
+  }
+
+  isAuthenticated(): boolean {
+    return this.authService.isAuthenticated()
+  }
+
+  getToken(): string | undefined{
+    return this.authService.getToken()
   }
 }
